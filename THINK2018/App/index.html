@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<title>Think HDM</title>
+		<link rel="stylesheet" href="styles/main.css">
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<div id="page"  >
+            <div >
+             <div style="float: left;padding:10px">
+                 <img src="images/IBM_MichaelProfile.png" @click="get_email(295)" style="height:400px;width:400px;padding:20px">
+                 <div style=" font-size: 14px;margin-left: 100px;margin-right: 100px;margin-top: 10px"><ul style="text-align: left;background-color: white;color:black;opacity: 0.75;list-style: none;" ><li>45 year old architect</li><li>Lives in Chicago </li><li>Family Centric </li></ul></div>
+             </div>
+             <div style="float: left;padding: 10px">
+                <img src="images/IBM_SarahProfile.png" @click="get_email(302)" style="height:400px;width:400px;padding:20px">
+                   <div style=" font-size: 14px;margin-left: 100px;margin-right: 100px;margin-top: 10px"><ul style="text-align: left;background-color: white;color:black;opacity: 0.75;list-style: none;" ><li>22 year old college student</li><li>Music</li><li>Travel </li></ul></div>
+             </div>
+             <div style="float: left;padding: 10px;align-items: center;">
+                 <img src="images/IBM_GordonProfile.png" @click="get_email(610)" style="height:400px; width:400px;padding: 20px">
+                  <div style=" font-size: 14px;margin-left: 100px;margin-right: 100px;margin-top: 10px"><ul style="text-align: left;background-color: white;color:black;opacity: 0.75;list-style: none;" ><li>62 year oldArchitect</li><li>Fitness freak </li><li>Travel</li></ul></div>
+             </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script >
+var Page = new Vue({
+    name: 'main',
+    el: '#page',
+    data :{
+    	userType : undefined,
+    	txt_input :'',
+    },
+    methods:{
+    	get_email(user){
+    		console.log("in get_email");
+    		console.log(user);
+    		localStorage.setItem("userType",user);
+    		window.location.href = "techinfo.html";
+    	}
+    }
+})
+</script>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<body >
+<div id = "ad" v-bind:style="bgc" style="width: 600px;height: 400px;position: absolute;">
+	<div style="float: left;padding-left: 20px;width: 250px" >
+	<link rel="stylesheet" href="styles/main.css">
+	
+		<h3 style="color:white;text-align: center ;padding-top: 50px;font-size: 24px;color: DarkOrange ;text-shadow: 2px; ;font-family: Cursive;"><b>{{userText}}</h3>
+		<p style="color:white;text-align: center;font-size: 16px">Join our list now and save <br>{{discount}} on all our bus tours<sup>*</sup> </p>
+		<h6 style="float: right;color:white;padding-right: 20px">exclusions may apply</h6><br><br><br>
+		<span style="text-align: left;color: white;font-size: 14px" ><b>Email<sup>*</sup></b></span><br>
+			<input  size="14" type="text"  name="title" placeholder="Email" id="input_email" width = "75px" height = "18px" style="border: none" /><br><br>
+			<button  style="font-size: 14px;float: center" width="50px" type="button" class="btnad" onClick="get_email()">Get Started !</button>	
+	</div><br>
+	<div style="float: right">
+		<span><img v-bind:src="imgsrc" style="float: right;padding-top: 50px;padding-right: 20px;padding-bottom: 50px" width="250" height="250"><br></span>
+	</div>
+
+</div>
+<script src="https://unpkg.com/vue"></script> 
+<link rel="stylesheet" href="styles/main.css">
+
+<script >
+	const ad = new Vue({
+		el : '#ad',
+		data:{
+			userId : 123,
+			userText : undefined,
+			userDetails :[],
+			discount: undefined,
+			userType: '',
+			bgcolor :'red',
+			imagecode : '',
+			bgc:{
+				backgroundColor : ''
+			}
+			
+		},
+		beforeMount()
+		{
+			this.bgc.backgroundColor =localStorage.getItem("bgcolorinfo").replace(/\s/g, '');
+			//this.bgc.backgroundColor = "Lightblue";
+			console.log("printing background"+this.bgc.backgroundColor);
+			this.discount = localStorage.getItem("discount");
+			this.imagecode = localStorage.getItem("imagecode");
+			console.log("in mounted");
+			console.log(this.userType);
+			this.imgsrc ='images/Image_code'+this.imagecode+'.png';
+			if(this.imagecode==1){
+				//this.imgsrc = 'images/Michael1.png';
+				this.userText = "Visiting New York";
+			}
+			else if(this.imagecode == 2){
+				//this.imgsrc = 'images/sarah1.png';
+				this.userText = "Party In Times Square";
+			}
+			else{
+				//this.imgsrc = 'images/GorDon1.png';
+				this.userText = "Rekindle Love in New York City";
+			}
+
+		},
+		mounted() {
+	}
+	})
+</script>
+
+</body>
+</html>

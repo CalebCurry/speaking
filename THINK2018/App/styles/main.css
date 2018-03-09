@@ -1,0 +1,91 @@
+html,body {
+	padding: 0;
+	margin: 0;
+	background-image: url("../images/IBM_BG.jpg");
+}
+
+.bg {
+    /* The image used */
+    background-image: url("../images/IBM_BG.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container  {
+	padding-top:10%;
+	padding-left: 3%;
+    margin: auto;
+    align-items: center;
+}
+
+@keyframes FadeIn { 
+  0% {
+    opacity: 0;
+    transform: scale(.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.containerad {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.containerad img {
+    width: 100%;
+    height: auto;
+}
+
+
+.btnfade {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+.containerad .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: blue;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btnad {
+    background-color: Darkblue;
+    color: white;
+    padding: 8px 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+.containerad .btn:hover {
+    background-color: black;
+}

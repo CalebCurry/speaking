@@ -1,0 +1,179 @@
+<html>
+
+<body class = "bg">
+	<div id = "techinfo" position="absolute" width ="100%" height ="100%" >
+		<div id="step3imgsrc" style="position: relative; top: 0%;left: 2%">
+			<div id="step3" style="animation-fill-mode: both;animation-duration: 2s;display: none">
+				<img src="images/seq3.png" width="40%" height="40%" style="float:left; padding-top: 0.5%;padding-left:2%;position: relative;">
+			</div>
+			<div id="prof_pic_step4" style="animation-fill-mode: both;animation-duration: 2s;display: none">
+				<img v-bind:src="imgsrc" width="20%" height="40%" style=" padding-top: 2%;left: 8%;position: relative;"><br>
+				<img src="images/login_user.png" style= "left:50%;position:relative;" width="15%" height="10%"><br>
+			</div>
+			<div id="seq5" style="animation-fill-mode: both;animation-duration: 2s;display: none">
+				<img src="images/seq5arrow.png" style= "top:50%; left:30%;position:absolute;" width="20%" height="65%">
+			</div>
+		</div>
+		<div id="step2" style="position:absolute; top: 35%;left: 9%;animation-duration: 1s;display:none">
+			<img src="images/seq2.png" height="25%" width="45%" style="left: 2%;top: 0%; position: relative;padding: 0"><br>
+		</div>
+		<div id ="seq16" style="position: absolute; left: 5%;top:55%">
+			<div id="step1" style="animation-duration: 2s;display: none">
+				<img src="images/seq1.png" width="50%" height="40%" style="float:left;left: 2%;top: 0px; position: relative;">
+			</div>
+			<div id ="step6" style="animation-fill-mode: both;animation-duration: 2s;display: none">
+				<img src="images/seq6.png" width="20%" height="55%" style="left:30%;top: 10%; position: absolute;">
+			</div>
+		</div>
+		<div id="adwindowstep7" class="containerad" style="position: absolute;left: 55%;top:58%;right: 5%;display: none">
+			<img src="images/buildbg.png" style="width: 100%">
+			<button id="adtext" style="font-size: 20px" class="btnfade"><b> Dynamic Ad is being constructed </b></button>
+			<i class="fa fa-gear fa-spin" id="spincontrol" style="font-size:35px;position: absolute;left: 80%;top:45%;color:blue"></i>
+			<button id="adbtn" style ="display: none;font-size: 20px" class="btn" @click="navigate()">Your Ad is ready. Click here</button>	
+		</div>
+	</div>	
+
+<script src="https://unpkg.com/vue"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="sample.js"></script>
+<link rel="stylesheet" href="styles/main.css">
+
+<script >
+	var techinfo = new Vue({
+		el : '#techinfo',
+		data:{
+			userId : 123,
+			userDetails :[],
+			discount: undefined,
+			user_array :undefined,
+			userType: '',
+			bgcolor :'red',
+			imgcode : '',
+			imgsrc :'',
+			imgsrcad:'',
+			userText : undefined,
+			primgsrc :'',
+			collapsed :false,
+			bgc:{
+				backgroundColor : ''
+			},
+			discountJSON:undefined ,
+			imgcodeJSON :undefined,
+			bgcolorJSON : undefined
+			
+		},
+		beforeMount()
+		{
+			this.userType = localStorage.getItem("userType");
+			if(this.userType==302){
+				this.userText = "Party In Times Square";
+				this.imgsrc = 'images/IBM_SarahProfile.png';
+			}
+			else if(this.userType == 295){
+				this.userText = "Visiting New York";
+				this.imgsrc = 'images/IBM_MichaelProfile.png';
+			}
+			else{
+				this.userText = "Rekindle Love in New York City";
+				this.imgsrc = 'images/IBM_GordonProfile.png';
+			}
+
+		},
+		mounted() {
+
+
+			get_discount(this.userType).then(function(data){
+				console.log("trying discount function in techinfo "+JSON.stringify(data));
+
+				var records_user = data["records"];
+				this.user_array = records_user[0];
+				var discount =  this.user_array[14];
+				return data;
+			});
+
+			get_image(this.userType).then(function(data){
+				console.log("trying image function in techinfo "+data["records"]);
+				var records_image = data["records"];
+				var rec_img_array = records_image[0];
+				return rec_img_array[13];
+			});
+
+			get_background_color(this.userType).then(function(data){
+				console.log("trying color function in techinfo "+data["records"]);
+				var bgcolorrecords = data["records"];
+				var bgcolorinfo = bgcolorrecords[0];
+				return bgcolorinfo[14];
+				this.bgc.backgroundColor=bgcolorinfo[14].replace(/\s/g, '');
+			});
+			
+			this.discountJSON =get_discount(this.userType);
+			this.imgcodeJSON = get_image(this.userType);
+			this.bgcolorJSON= get_background_color(this.userType);
+			
+			console.log("checking if discount received"+this.discount);
+				
+			if(this.userType==295)
+			{
+				
+				this.primgsrc = 'images/Michael1.png';
+				this.imgsrcad = 'images/Image_code1.png';
+			}
+			else if(this.userType == 302)
+			{
+				this.primgsrc = 'images/sarah1.png';
+				
+				this.imgsrcad = 'images/Image_code2.png';
+			}
+			else
+			{
+				this.primgsrc = 'images/GorDon1.png';
+				
+				this.imgsrcad = 'images/Image_code3.png';
+			}
+			
+
+			
+	},
+	methods:{
+		navigate(){
+
+			/* for discount part*/
+			var disresponse = this.discountJSON["responseJSON"];
+			var disrecords = disresponse["records"];
+			var dis_array = disrecords[0];
+			this.discount =  dis_array[14];
+
+
+			/* for image part*/
+			var imageresponse = this.imgcodeJSON["responseJSON"];
+			var imgrecords = imageresponse["records"];
+			var img_array = imgrecords[0];
+			this.imgcode =  img_array[13];
+
+			/* for background color part*/
+			var bgresponse = this.bgcolorJSON["responseJSON"];
+			var bgrecords = bgresponse["records"];
+			var bg_array = bgrecords[0];
+			this.bgcolor =  bg_array[14];
+
+			localStorage.setItem("discount",this.discount);
+			localStorage.setItem("imagecode",this.imgcode);
+			localStorage.setItem("bgcolorinfo",this.bgcolor);
+			let params = ``;
+
+			win = window.open("ad_landing_page.html","_blank", 'scrollbars=no,resizable=no,status=no,location=yes,scrollbar=yes,toolbar=no,menubar=no,width=600px,height=400px,status = yes,left=500,top=250');
+			win.focus()
+		}
+			
+	}
+	
+})
+</script>
+
+</body>
+</html>
