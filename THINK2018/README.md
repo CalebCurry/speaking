@@ -1,5 +1,5 @@
 Resources!  
-Watch the replay of the session [here](https://ibm.co/builtfordevsLIVE).
+Watch the replay of the session [here](http://bit.ly/Power2Devs).
 
 I encourage you to dive into this code and build something fit for your needs!  To begin, you'll need the data architecture.
 
